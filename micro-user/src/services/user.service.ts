@@ -41,8 +41,6 @@ export class UserService {
     username,
     verificationCode,
   }: InputRegister) {
-    // on vérifie le format du nom + la 1e lettre en maj
-
     const existingUser = await this.findUserByEmail(email);
     if (existingUser) {
       throw new Error("Vous avez déjà un compte, veuillez vous connecter.");
@@ -110,7 +108,7 @@ export class UserService {
     return token;
   }
 
-  // supprimer un utilisateur
+  // supprimer son compte
   async deleteUser(id: string) {
     await this.findUserById(id);
     return await this.userRepository.delete(id);

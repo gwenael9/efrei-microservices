@@ -96,10 +96,18 @@ export class UserController {
 
   // supprimer un user
   static async deleteUser(req: Request, res: Response) {
-    const { id } = req.params;
+    const user = req.user;
+
+    // si aucun user connecté
+    if (!user) {
+      res.status(400).json({ message: "Utilisateur inconnu." });
+      return;
+    }
 
     try {
-      await userService.deleteUser(id);
+      await userService.deleteUser(user.id);
+      const cookies = await new Cookies(req, res);
+      cookies.set("token");
       res.status(200).json({ message: "L'utilisateur a bien été supprimé." });
     } catch (error) {
       res.status(500).json({ message: (error as Error).message });

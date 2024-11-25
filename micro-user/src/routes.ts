@@ -17,7 +17,7 @@ router.get("/logout", UserController.logout);
 router.get("/me", UserController.getProfile);
 
 // supprimer son compte
-router.delete("/user/:id", lookToken, UserController.deleteUser);
+router.delete("/user", UserController.deleteUser);
 
 // verifier email
 router.post("/verify", UserController.verifyAccount);
