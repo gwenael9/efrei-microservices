@@ -1,2 +1,4 @@
 api-gmail
 .env
+node_modules
+*.sqlite3
