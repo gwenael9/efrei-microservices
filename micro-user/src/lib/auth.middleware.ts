@@ -37,6 +37,8 @@ export const authMiddleware = async (
   const cookies = new Cookies(req, res);
   const token = cookies.get("token");
 
+  console.log("tokeeeen", token);
+
   if (token) {
     try {
       const verify = await jwtVerify<Payload>(
@@ -47,6 +49,7 @@ export const authMiddleware = async (
       user = await userService.findUserByEmail(verify.payload.email);
       req.user = user;
     } catch (err) {
+      console.log("erroooooooor", err);
       // supprime le token si invalide
       cookies.set("token");
     }

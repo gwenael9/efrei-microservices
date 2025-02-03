@@ -54,7 +54,13 @@ export class UserController {
 
       // on le place dans les cookies
       const cookies = new Cookies(req, res);
-      cookies.set("token", token, { httpOnly: true });
+      cookies.set("token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+      });
+      
 
       res.status(200).json({ message: `Bienvenue ${user.username} !` });
     } catch (error) {
@@ -78,9 +84,11 @@ export class UserController {
   static async getProfile(req: Request, res: Response) {
     const user = req.user;
 
+    console.log("getProfileeeeee", user);
+
     // si aucun user connecté
     if (!user) {
-      res.status(400).json({ message: "Utilisateur inconnu." });
+      res.status(403).json({ message: "Utilisateur inconnu." });
       return;
     }
 

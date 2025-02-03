@@ -23,13 +23,28 @@ type EmailRequest struct {
 }
 
 func getClient(config *oauth2.Config) *http.Client {
-	tokenFile := "token.json"
-	tok, err := tokenFromFile(tokenFile)
-	if err != nil {
-		tok = getTokenFromWeb(config)
-		saveToken(tokenFile, tok)
-	}
-	return config.Client(context.Background(), tok)
+    tokenFile := "token.json"
+    tok, err := tokenFromFile(tokenFile)
+    if err != nil {
+        tok = getTokenFromWeb(config)
+        saveToken(tokenFile, tok)
+    }
+
+    // Vérifie si le token est expiré ou proche de l'expiration et le raffraichi
+    if !tok.Valid() {
+        ts := config.TokenSource(context.Background(), tok)
+        newTok, err := ts.Token()
+        if err != nil {
+            log.Fatalf("Erreur lors du rafraîchissement du token : %v", err)
+        }
+
+        if newTok.AccessToken != tok.AccessToken {
+            saveToken(tokenFile, newTok)
+            tok = newTok
+        }
+    }
+
+    return config.Client(context.Background(), tok)
 }
 
 func tokenFromFile(file string) (*oauth2.Token, error) {

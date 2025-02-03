@@ -17,7 +17,7 @@ const PORT = 4000;
 app.use(
   "/",
   cors<cors.CorsRequest>({
-    origin: "http://localhost:8080",
+    origin: ["http://localhost:8080", "http://localhost:5001"],
     credentials: true,
   }),
   express.json()
