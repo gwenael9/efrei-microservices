@@ -44,9 +44,13 @@ export class TasksService {
   /**
    * Delete
    */
-  async deleteTask(userId: string, taskId: string) {
-    await this.getOneTask(userId, taskId);
-    return await this.taskService.delete(taskId);
+  async deleteTask(userId: string, taskId: string): Promise<Task> {
+    const task = await this.getOneTask(userId, taskId);
+    if (!task) {
+      throw new Error("La tâche n'existe pas");
+    }
+    await this.taskService.delete(taskId);
+    return task;
   }
 
   /**

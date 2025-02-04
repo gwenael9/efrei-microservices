@@ -42,8 +42,8 @@ export class TasksController {
 
   static async deleteTask(req: Request, res: Response) {
     try {
-      await taskService.deleteTask(req.userId ?? "", req.params.id);
-      res.status(204).send();
+      const taskToDelete = await taskService.deleteTask(req.userId ?? "", req.params.id);
+      res.status(200).json({ message: `La tâche "${taskToDelete.title}" a bien été supprimée.`});
     } catch (error) {
       res
         .status(500)

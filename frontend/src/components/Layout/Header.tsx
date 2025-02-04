@@ -89,7 +89,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Button onClick={() => router.push("/auth/login")}>Connexion</Button>
+          <Button onClick={() => router.push("/auth")}>Connexion</Button>
         )}
       </div>
     </div>

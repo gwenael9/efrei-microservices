@@ -33,7 +33,7 @@ export default function Taches() {
   if (error) {
     return (
       <Layout title="Erreur de chargement">
-        <div>{error}</div>
+        <p className="text-center mt-5">{error}</p>
       </Layout>
     );
   }
@@ -46,17 +46,15 @@ export default function Taches() {
           <FormTasks submitLabel="Confirmer" onSuccess={() => fetchData()} />
         </div>
 
-        {tasks && tasks.length > 0 ? (
-          <div>
-            <div className="flex flex-wrap justify-center gap-2 mt-6">
-              {tasks.map((task) => (
-                <TaskCard
-                  key={task.id}
-                  task={task}
-                  onSuccess={() => fetchData()}
-                />
-              ))}
-            </div>
+        {tasks.length > 0 ? (
+          <div className="flex flex-wrap justify-center gap-2 mt-6">
+            {tasks.map((task) => (
+              <TaskCard
+                key={task.id}
+                task={task}
+                onSuccess={() => fetchData()}
+              />
+            ))}
           </div>
         ) : (
           <div className="text-center mt-5">Aucune tâche pour le moment.</div>

@@ -11,6 +11,7 @@ const mailService = new MailService();
 export class UserController {
   // création de compte
   static async register(req: Request, res: Response) {
+    console.log("register", req.body);
     const infos: InputRegister = req.body;
     try {
       const verificationCode = randomInt(100000, 999999).toString();
@@ -32,6 +33,7 @@ export class UserController {
           "Votre compte a bien été créé ! Un code de vérification a été envoyé par e-mail.",
       });
     } catch (error) {
+      console.log("erreur", (error as Error).message);
       res.status(400).json({ message: (error as Error).message });
     }
   }
@@ -119,10 +121,17 @@ export class UserController {
 
   // vérification du compte via code
   static async verifyAccount(req: Request, res: Response) {
-    const { email, code } = req.body;
+    const { code } = req.body;
+    const user = req.user;
+
+    // si aucun user connecté
+    if (!user) {
+      res.status(403).json({ message: "Utilisateur inconnu." });
+      return;
+    }
 
     try {
-      await userService.verifyAccount(email, code);
+      await userService.verifyAccount(user.email, code);
 
       res.status(200).json({ message: "Compte vérifié avec succès !" });
     } catch (error) {

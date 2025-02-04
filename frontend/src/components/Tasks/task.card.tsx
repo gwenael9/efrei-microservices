@@ -40,15 +40,15 @@ export default function TaskCard({ task, onSuccess }: TaskCardProps) {
   };
 
   return (
-    <Card className={`border-4`}>
+    <Card className="border-2 border-primary">
       <CardHeader className="font-bold">
         <CardTitle className="flex justify-between min-h-12 text-y">
           {task.title.toUpperCase()}
         </CardTitle>
       </CardHeader>
       <CardContent>{task.description}</CardContent>
-      <CardFooter className="flex justify-between">
-        <div className="flex items-center gap-4">
+      <CardFooter className="flex justify-end">
+        <div className="flex gap-4">
           <FormTasks
             initialData={task}
             submitLabel="Modifier"
