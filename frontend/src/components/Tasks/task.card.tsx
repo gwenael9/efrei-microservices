@@ -22,7 +22,7 @@ export default function TaskCard({ task, onSuccess }: TaskCardProps) {
   const { toast } = useToast();
 
   // supprimer une tâche
-  const handleDeleteTask = async (id: number) => {
+  const handleDeleteTask = async (id: string) => {
     try {
       const messageDelete = await deleteTask(id);
       onSuccess();
@@ -40,9 +40,7 @@ export default function TaskCard({ task, onSuccess }: TaskCardProps) {
   };
 
   return (
-    <Card
-      className={`border-4`}
-    >
+    <Card className={`border-4`}>
       <CardHeader className="font-bold">
         <CardTitle className="flex justify-between min-h-12 text-y">
           {task.title.toUpperCase()}

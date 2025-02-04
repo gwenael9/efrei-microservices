@@ -14,4 +14,7 @@ export const apiClientAuthent = axios.create({
 export const apiClientTasks = axios.create({
   baseURL: API_URL_TASKS,
   withCredentials: true, // cookies
+  headers: {
+    "Content-Type": "application/json",
+  },
 });

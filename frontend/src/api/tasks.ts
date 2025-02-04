@@ -54,7 +54,7 @@ export const updateTask = async (
 };
 
 // supprime une tâche
-export const deleteTask = async (taskId: number) => {
+export const deleteTask = async (taskId: string) => {
   try {
     const response = await apiClientTasks.delete(`/tasks/${taskId}`);
     return response.data;

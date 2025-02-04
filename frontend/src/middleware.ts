@@ -15,8 +15,6 @@ const SECRET_KEY = Uint8Array.from(atob(process.env.SECRET_KEY || ""), (c) =>
 export default async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value; // Récupérer le token depuis les cookies
 
-  console.log("tokeeen", token);
-
   if (!token) {
     return handleRedirect(request);
   }

@@ -81,8 +81,6 @@ export class UserController {
   static async getProfile(req: Request, res: Response) {
     const user = req.user;
 
-    console.log("getProfileeeeee", user);
-
     // si aucun user connecté
     if (!user) {
       res.status(403).json({ message: "Utilisateur inconnu." });

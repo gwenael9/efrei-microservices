@@ -40,7 +40,6 @@ export function Header() {
         variant: "success"
       });
     } catch (err) {
-      console.log("Error during logout", err);
       toast({
         title: "Erreur lors de la déconnexion. Veuillez Réessayer.",
         variant: "destructive",

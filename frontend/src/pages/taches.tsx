@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useEffect, useState } from "react";
 import { Task } from "../types/interface";
@@ -13,10 +12,9 @@ export default function Taches() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-
   const fetchData = async () => {
     try {
-      const { tasks: tasksData, totalPages } = await getTasks();
+      const tasksData = await getTasks();
       setTasks(tasksData);
     } catch (err) {
       setError("Erreur lors du chargement des tâches.");
@@ -45,13 +43,10 @@ export default function Taches() {
       <div className="p-6">
         <div className="flex justify-between">
           <h2 className="text-2xl font-bold mb-6">Liste des tâches</h2>
-          <FormTasks
-            submitLabel="Confirmer"
-            onSuccess={() => fetchData()}
-          />
+          <FormTasks submitLabel="Confirmer" onSuccess={() => fetchData()} />
         </div>
 
-        {tasks.length > 0 ? (
+        {tasks && tasks.length > 0 ? (
           <div>
             <div className="flex flex-wrap justify-center gap-2 mt-6">
               {tasks.map((task) => (
