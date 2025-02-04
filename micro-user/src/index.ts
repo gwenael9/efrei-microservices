@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import db from "./lib/datasource"
+import db from "./lib/datasource";
 import * as dotenv from "dotenv";
 import router from "./routes";
 import { authMiddleware } from "./lib/auth.middleware";
@@ -8,7 +8,7 @@ import { authMiddleware } from "./lib/auth.middleware";
 dotenv.config();
 
 export interface Payload {
-  email: string;
+  id: string;
 }
 
 const app = express();
@@ -16,8 +16,12 @@ const PORT = 4000;
 
 app.use(
   "/",
-  cors<cors.CorsRequest>({
-    origin: ["http://localhost:8080", "http://localhost:5001"],
+  cors({
+    origin: [
+      "http://localhost:8080",
+      "http://localhost:5001",
+      "http://localhost:3000",
+    ],
     credentials: true,
   }),
   express.json()
@@ -29,7 +33,6 @@ app.use(authMiddleware);
 // initialiser la base de données
 db.initialize()
   .then(() => {
-
     app.use(router);
 
     app.listen(PORT, () => {

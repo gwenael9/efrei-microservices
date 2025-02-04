@@ -100,7 +100,7 @@ export class UserService {
     }
 
     // généré un token JWT
-    const token = await new SignJWT({ email: user.email })
+    const token = await new SignJWT({ id: user.id })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime("12h")
       .sign(new TextEncoder().encode(jwtSecret));

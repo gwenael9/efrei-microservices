@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { UserController } from "./user.resolver";
-import { authMiddleware, lookToken } from "./lib/auth.middleware";
+import { lookToken } from "./lib/auth.middleware";
 
 const router = Router();
 

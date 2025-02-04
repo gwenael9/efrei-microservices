@@ -56,11 +56,7 @@ export class UserController {
       const cookies = new Cookies(req, res);
       cookies.set("token", token, {
         httpOnly: true,
-        sameSite: "none",
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
       });
-      
 
       res.status(200).json({ message: `Bienvenue ${user.username} !` });
     } catch (error) {
@@ -76,6 +72,7 @@ export class UserController {
 
       res.status(200).json({ message: "Déconnexion réussite." });
     } catch (err) {
+      console.log("erreur lors de la déconnexion", (err as Error).message);
       res.status(500).json({ message: "Erreur lors de la déconnexion." });
     }
   }

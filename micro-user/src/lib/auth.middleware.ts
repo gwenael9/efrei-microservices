@@ -32,12 +32,9 @@ export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<void> => {
-  let user: User | null = null;
+) => {
   const cookies = new Cookies(req, res);
   const token = cookies.get("token");
-
-  console.log("tokeeeen", token);
 
   if (token) {
     try {
@@ -45,15 +42,15 @@ export const authMiddleware = async (
         token,
         new TextEncoder().encode(process.env.JWT_PRIVATE_KEY)
       );
-      // si le token est lié à un user, on le stock dans notre context
-      user = await userService.findUserByEmail(verify.payload.email);
+      const user = await userService.findUserById(verify.payload.id);
       req.user = user;
     } catch (err) {
-      console.log("erroooooooor", err);
-      // supprime le token si invalide
-      cookies.set("token");
+      console.error("Erreur de vérification du token:", err);
+      cookies.set("token"); // Si le token est invalide, on le supprime
     }
+  } else {
+    console.log("Aucun token trouvé dans les cookies.");
   }
-
   next();
 };
+
