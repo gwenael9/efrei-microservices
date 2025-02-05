@@ -107,7 +107,7 @@ export default function LoginForm() {
           title: message,
           variant: "success",
         });
-        router.push("/taches");
+        router.push("/");
       } catch (error) {
         toast({
           title: (error as Error).message,

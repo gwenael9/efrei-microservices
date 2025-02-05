@@ -69,7 +69,7 @@ export function Header() {
             <DropdownMenuContent className="w-48 font-semibold" align="end">
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => router.push("/taches")}
+                onClick={() => router.push("/")}
               >
                 Tâches
               </DropdownMenuItem>

@@ -56,7 +56,7 @@ export default function Verify() {
 
   return (
     <Layout title="Vérifier votre compte">
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center mt-12">
         <Card className="w-[500px]">
           <CardHeader>
             <CardTitle>Veuillez vérifier votre compte</CardTitle>

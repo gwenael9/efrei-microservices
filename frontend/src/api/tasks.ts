@@ -38,7 +38,7 @@ export const addTask = async (taskData: {
 
 // modifier une tâche
 export const updateTask = async (
-  taskId: number,
+  taskId: string,
   updateData: {
     title: string;
     description: string;
