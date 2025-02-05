@@ -44,8 +44,10 @@ export default function Verify() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
     try {
-      const message = await verify(values.code);
+      const email = localStorage.getItem("user_email");
+      const message = await verify(values.code, email ?? "");
       toast({ title: message, variant: "success" });
+      localStorage.removeItem("user_email");
       router.push("/auth");
     } catch (error) {
       toast({ title: (error as Error).message, variant: "destructive" });

@@ -121,17 +121,10 @@ export class UserController {
 
   // vérification du compte via code
   static async verifyAccount(req: Request, res: Response) {
-    const { code } = req.body;
-    const user = req.user;
-
-    // si aucun user connecté
-    if (!user) {
-      res.status(403).json({ message: "Utilisateur inconnu." });
-      return;
-    }
+    const { code, email } = req.body;
 
     try {
-      await userService.verifyAccount(user.email, code);
+      await userService.verifyAccount(email, code);
 
       res.status(200).json({ message: "Compte vérifié avec succès !" });
     } catch (error) {

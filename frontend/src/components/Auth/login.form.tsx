@@ -95,6 +95,7 @@ export default function LoginForm() {
         title: response.message,
         variant: "success",
       });
+      localStorage.setItem("user_email", email);
       // on redirige vers la page pour vérifier le compte
       router.push("/auth/verify");
     }

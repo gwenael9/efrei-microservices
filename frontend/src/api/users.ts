@@ -43,7 +43,7 @@ export const getUser = async () => {
   return response.data;
 };
 
-export const verify = async (code: string) => {
-  const response = await apiClientAuthent.post("/verify", { code });
+export const verify = async (code: string, email: string) => {
+  const response = await apiClientAuthent.post("/verify", { code, email });
   return response.data.message;
 };
