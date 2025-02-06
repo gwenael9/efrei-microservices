@@ -30,5 +30,5 @@ function handleRedirect(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/auth", "/auth/verify"],
+  matcher: ["/", "/auth", "/auth"],
 };
